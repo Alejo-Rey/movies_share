@@ -4,7 +4,8 @@ unless DB.table_exists?(:movies)
     DB.create_table :movies do
         primary_key :id
         String :name
-        Float :price
+        String :description
+        String :url_img
     end
 end
 unless DB.table_exists?(:functions)
@@ -19,7 +20,6 @@ end
 unless DB.table_exists?(:bookings)
     DB.create_table :bookings do
         primary_key :id
-        String :name
         foreign_key :function_model_id
     end
 end

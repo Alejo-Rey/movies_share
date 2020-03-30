@@ -31,11 +31,11 @@ module Movie
                     end
                 end
             end
+            
 
             desc 'Create the movie'
             params do
                 requires :name, type: String, desc: 'The name'
-                requires :price, type: Integer, desc: 'The price'
             end
             post do
                 Movies::Create.call(params: params) do |m|
@@ -52,7 +52,6 @@ module Movie
             params do
                 requires :id, type: Integer, desc: 'Identification'
                 requires :name, type: String, desc: 'The name'
-                requires :price, type: Integer, desc: 'The price'
             end
             put '/:id' do
                 Movies::Update.call(params: params) do |m|
@@ -80,9 +79,26 @@ module Movie
                     end
                 end
             end
+            segment '/:movie_model_id' do
+                resource :functions do
+                    
+                    desc 'Return all Functions'
+                    get do
+                        Function::ShowFilter.call(params: params) do |m|
+                            m.success do |function|
+                                function
+                            end
+                            m.failure do |message|
+                                message
+                            end
+                        end
+                    end
+                end
+            end
         end
 
-        resource :booking do
+        resource :bookings do
+
             desc 'Return all bookins'
             get do
                 Booking::Show.call() do |m|
@@ -98,7 +114,6 @@ module Movie
             desc 'Create a Booking'
             params do
                 requires :function_model_id, type: Integer, desc: 'The identification function'
-                requires :name, type: String, desc: 'The name'
             end
             post do
                 Booking::Create.call(params: params) do |m|
@@ -114,7 +129,6 @@ module Movie
             desc 'Modify the booking'
             params do
                 requires :id, type: Integer, desc: 'Identification'
-                requires :name, type: String, desc: 'The name'
             end
             put '/:id' do
                 Booking::Update.call(params: params) do |m|
@@ -139,6 +153,36 @@ module Movie
                     end
                     m.failure do |message|
                         error!({ error: message }, 404, { 'Content-Type' => 'text/error' })
+                    end
+                end
+            end
+        end
+
+        resource :functions do
+            desc 'Return all Functions'
+            get do
+                Function::Show.call() do |m|
+                    m.success do |function|
+                        function
+                    end
+                    m.failure do |message|
+                        message
+                    end
+                end
+            end
+            desc 'Create a Function'
+            params do
+                requires :movie_model_id, type: Integer, desc: 'The movie identification'
+                requires :date_movie, type: Time, desc: 'The function date'
+                requires :day_of_week, type: Integer
+            end
+            post do
+                Function::Create.call(params: params) do |m|
+                    m.success do |function|
+                        function
+                    end
+                    m.failure do |message|
+                        message
                     end
                 end
             end
