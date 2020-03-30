@@ -41,9 +41,11 @@ functions | GET, POST, PUT, DELETE |
 
 You need to install the BD postgresql, follow this steps [http://zetcode.com/db/postgresqlruby/](http://zetcode.com/db/postgresqlruby/) and then create the database with the sript [database/script.sql](./database/script.sql)
 
-`git clone https://github.com/Alejo-Rey/movies_share.git`\
+`git clone https://github.com/Alejo-Rey/movies_share.git`
 
 `cd movies_share`
+
+`bundle install`
 
 Then you need to sed the enviroments variables with the data of the database, only fill the USER_DB and USER_PASS_DB
 - export USER_DB=
