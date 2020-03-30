@@ -7,7 +7,6 @@ module Movie
         resource :movies do
             desc 'Return all movies'
             get do
-                byebug
                 Movies::Show.call() do |m|
                     m.success do |movies|
                         movies
@@ -86,22 +85,62 @@ module Movie
         resource :booking do
             desc 'Return all bookins'
             get do
-                "get booking"
+                Booking::Show.call() do |m|
+                    m.success do |booking|
+                        booking
+                    end
+                    m.failure do |message|
+                        message
+                    end
+                end
             end
 
             desc 'Create a Booking'
+            params do
+                requires :function_model_id, type: Integer, desc: 'The identification function'
+                requires :name, type: String, desc: 'The name'
+            end
             post do
-                "Created"
+                Booking::Create.call(params: params) do |m|
+                    m.success do |booking|
+                        booking
+                    end
+                    m.failure do |message|
+                        message
+                    end
+                end
             end
 
             desc 'Modify the booking'
-            put do
-                "Midify"
+            params do
+                requires :id, type: Integer, desc: 'Identification'
+                requires :name, type: String, desc: 'The name'
+            end
+            put '/:id' do
+                Booking::Update.call(params: params) do |m|
+                    m.success do |booking|
+                        booking
+                    end
+                    m.failure do |message|
+                        message
+                    end
+                end
             end
 
             desc 'Delete de Booking'
-            delete do
-                "Deleted"
+            params do
+                requires :id, type: Integer, desc: 'Identification'
+            end
+            delete '/:id' do
+                Booking::Delete.call(params: params) do |m|
+                    m.success do
+                        status 204
+                        "Deleted"
+                    end
+                    m.failure do |message|
+                        error!({ error: message }, 404, { 'Content-Type' => 'text/error' })
+                    end
+                end
             end
         end
     end

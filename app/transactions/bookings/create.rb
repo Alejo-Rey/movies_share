@@ -9,13 +9,13 @@ module Booking
             @params = input.fetch(:params)
         end
         def create(input)
-            @movie = MovieModel.new(@params)
-            @movie.save
-            Success(@movie)
+            @booking = BookingModel.new(@params)
+            @booking.save
+            Success(@booking)
         end
 
         def serialize(input)
-            Success(@movie.to_hash)
+            Success(@booking.to_hash)
         end
     end
 end
