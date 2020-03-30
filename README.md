@@ -41,8 +41,8 @@ functions | GET, POST, PUT, DELETE |
 
 You need to install the BD postgresql, follow this steps [http://zetcode.com/db/postgresqlruby/](http://zetcode.com/db/postgresqlruby/) and then create the database with the sript [database/script.sql](./database/script.sql)
 
-`git clone https://github.com/Alejo-Rey/movies_share.git`
-.
+`git clone https://github.com/Alejo-Rey/movies_share.git`\
+
 `cd movies_share`
 
 Then you need to sed the enviroments variables with the data of the database, only fill the USER_DB and USER_PASS_DB
@@ -61,16 +61,34 @@ Then up the services.\
 ## Endpoints
 You can test the endpoints sending the petitions to the deployment on https://moviesharealejo.herokuapp.com/api/
 
-* movies
-`curl -X GET https://moviesharealejo.herokuapp.com/api/movies`\
+### /movies
+`curl -X GET 'https://moviesharealejo.herokuapp.com/api/movies'`\
 To show all the movies
 
-`curl -X GET 'http://localhost:9292/api/movies/1'`
+`curl -X GET 'https://moviesharealejo.herokuapp.com/api/movies/1'`\
+To show a filter movie
 
+`curl -X POST 'https://moviesharealejo.herokuapp.com/api/movies' -H 'Content-Type: application/json' -d '{"name": "movie 3", "description": "description 3", "url_img": "url_image 3"}'`\
+To create a movie
 
+### /functions
 
+`curl -X GET 'https://moviesharealejo.herokuapp.com/api/functions'`\
+To get all the functions
 
+`curl -X GET 'https://moviesharealejo.herokuapp.com/api/movies/1/functions'`\
+To show all the functions of the movie 1
 
+`curl -X POST 'https://moviesharealejo.herokuapp.com/api/functions' -H 'Content-Type: application/json' -d '{"movie_model_id": 1, "date_movie": "2020/03/30", "day_of_week": 1}'`\
+TO create a function of one movie (you check the movie in movie_model_id)
+
+### /bookings
+
+`curl -X GET 'https://moviesharealejo.herokuapp.com/api/bookings'`\
+To get all the bookings
+
+`curl -X POST 'https://moviesharealejo.herokuapp.com/api/booking' -H 'Content-Type: application/json' -d '{"function_model_id": 2}'`\
+To create a booking 
 
 
 
