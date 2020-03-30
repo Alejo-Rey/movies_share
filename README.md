@@ -1,6 +1,6 @@
 # API of booking movies with Grape
 
-This project build the API from 0 using the framework Grape and the gem Dry Transaction [https://dry-rb.org/gems/dry-transaction/](https://dry-rb.org/gems/dry-transaction/), and the gem Sequel [https://github.com/jeremyevans/sequel](https://github.com/jeremyevans/sequel)\
+This project build the API from 0 using the framework Grape and the gem Dry Transaction [https://dry-rb.org/gems/dry-transaction/](https://dry-rb.org/gems/dry-transaction/), and the gem Sequel [https://github.com/jeremyevans/sequel](https://github.com/jeremyevans/sequel)
 
 -----
 ## Structure
@@ -39,13 +39,13 @@ functions | GET, POST, PUT, DELETE |
 
 ## How to run it
 
-You need to install the BD postgresql, follow this steps [http://zetcode.com/db/postgresqlruby/](http://zetcode.com/db/postgresqlruby/) and then create the database with the sript [database/script.sql](./database/script.sql)\
+You need to install the BD postgresql, follow this steps [http://zetcode.com/db/postgresqlruby/](http://zetcode.com/db/postgresqlruby/) and then create the database with the sript [database/script.sql](./database/script.sql)
 
 `git clone https://github.com/Alejo-Rey/movies_share.git`
 .
 `cd movies_share`
 
-Then you need to sed the enviroments variables with the data of the database, only fill the USER_DB and USER_PASS_DB\
+Then you need to sed the enviroments variables with the data of the database, only fill the USER_DB and USER_PASS_DB
 - export USER_DB=
 - export USER_PASS_DB=
 - export HOST_DB=localhost
@@ -59,6 +59,14 @@ Then up the services.\
 `rackup`
 
 ## Endpoints
+You can test the endpoints sending the petitions to the deployment on https://moviesharealejo.herokuapp.com/api/
+
+* movies
+`curl -X GET https://moviesharealejo.herokuapp.com/api/movies`\
+To show all the movies
+
+`curl -X GET 'http://localhost:9292/api/movies/1'`
+
 
 
 
