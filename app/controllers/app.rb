@@ -7,6 +7,7 @@ module Movie
         resource :movies do
             desc 'Return all movies'
             get do
+                byebug
                 Movies::Show.call() do |m|
                     m.success do |movies|
                         movies
@@ -79,6 +80,28 @@ module Movie
                         error!({ error: message }, 404, { 'Content-Type' => 'text/error' })
                     end
                 end
+            end
+        end
+
+        resource :booking do
+            desc 'Return all bookins'
+            get do
+                "get booking"
+            end
+
+            desc 'Create a Booking'
+            post do
+                "Created"
+            end
+
+            desc 'Modify the booking'
+            put do
+                "Midify"
+            end
+
+            desc 'Delete de Booking'
+            delete do
+                "Deleted"
             end
         end
     end
